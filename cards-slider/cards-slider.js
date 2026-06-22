@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('[data-cards-slider]');
     if (!container) {
         return;
@@ -21,13 +21,13 @@ window.addEventListener('load', () => {
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'slider-btn slider-btn--next';
-    nextBtn.style.backgroundColor = arrowBg;
+    nextBtn.style.backgroundColor = arrowBackground;
     nextBtn.innerHTML = `<svg width="24" height="21" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
 
     prevBtn.addEventListener('mouseenter', () => { prevBtn.style.backgroundColor = arrowHoverBackground; });
     prevBtn.addEventListener('mouseleave', () => { prevBtn.style.backgroundColor = arrowBackground; });
-    prevBtn.addEventListener('mouseenter', () => { nextBtn.style.backgroundColor = arrowHoverBackground; });
-    prevBtn.addEventListener('mouseleave', () => { nextBtn.style.backgroundColor = arrowBackground; });
+    nextBtn.addEventListener('mouseenter', () => { nextBtn.style.backgroundColor = arrowHoverBackground; });
+    nextBtn.addEventListener('mouseleave', () => { nextBtn.style.backgroundColor = arrowBackground; });
 
     container.appendChild(prevBtn);
     container.appendChild(nextBtn);
@@ -60,14 +60,14 @@ window.addEventListener('load', () => {
 
             scroller.classList.remove('slider-scroller');
 
-            return
+            return;
         }
 
-        scroller.classList.add('scroller-scroller');
+        scroller.classList.add('slider-scroller');
         prevBtn.style.opacity = scroller.scrollLeft <= 1 ? '0.3' : '1';
         prevBtn.style.pointerEvents = scroller.scrollLeft <= 1 ? 'none' : 'auto';
 
-        const maxScroll = scroller.scrollLeft - scroller.clientWidth;
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
 
         nextBtn.style.opacity = scroller.scrollLeft >= maxScroll - 1 ? '0.3' : '1';
         nextBtn.style.pointerEvents = scroller.scrollLeft >= maxScroll - 1 ? 'none' : 'auto';
@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
     let isDragging = false, startX = 0, scrollStart = 0, moved = false;
 
     scroller.addEventListener('pointerdown', (event) => {
-        startX = event.clintX; scrollStart = scroller.scrollLeft; moved = false; isDragging = true;
+        startX = event.clientX; scrollStart = scroller.scrollLeft; moved = false; isDragging = true;
         event.preventDefault();
     });
 
@@ -131,7 +131,7 @@ window.addEventListener('load', () => {
 
         if (scrub !== null) {
             const start = container.getAttribute('data-start') || 'top top';
-            const end = conatiner.getAttribute('data-end') || 'bottom bottom';
+            const end = container.getAttribute('data-end') || 'bottom bottom';
 
             gsap.to(scroller, {
                 x: () => -(scroller.scrollWidth - container.offsetWidth),
