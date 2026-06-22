@@ -1,0 +1,57 @@
+[data-cards-slider] {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-scroller {
+    cursor: grab;
+    user-select: none;
+}
+
+.slider-scroller:active {
+    cursor: grabbing;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background 0.2s, opacity 0.3s ease;
+}
+
+.slider-btn--prev {
+    left: 10px;
+}
+
+.slider-btn--next {
+    right: 10px;
+}
+
+.slider-btn svg {
+    width: 24px;
+    height: 21px;
+    pointer-events: none;
+}
+
+.slider-btn--prev svg {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 640px) {
+    .slider-btn {
+        padding: 5px;
+    }
+    .slider-btn svg {
+        width: 20px;
+        height: 18px;
+    }
+}
