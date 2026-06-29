@@ -14,15 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const arrowHoverBackground = container.getAttribute('data-arrow-hover-bg') || 'rgba(0,0,0,0.8)';
     const arrowColor = container.getAttribute('data-arrow-color') || 'white';
 
+    const offsetX = parseFloat(container.getAttribute('data-arrow-offset-x')) || 0;
+    const offsetY = parseFloat(container.getAttribute('data-arrow-offset-y')) || 0;
+    const arrowSize = parseFloat(container.getAttribute('data-arrow-size')) || 24;
+    const edgeOffset = parseFloat(container.getAttribute('data-arrow-edge-offset')) || 10;
+
+    const arrowHeight = arrowSize * (21 / 24);
+
     const prevBtn = document.createElement('button');
     prevBtn.className = 'slider-btn slider-btn--prev';
     prevBtn.style.backgroundColor = arrowBackground;
-    prevBtn.innerHTML = `<svg width="24" height="21" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`
+    prevBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'slider-btn slider-btn--next';
     nextBtn.style.backgroundColor = arrowBackground;
-    nextBtn.innerHTML = `<svg width="24" height="21" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
+    nextBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
+
+    prevBtn.style.left = (edgeOffset + offsetX) + 'px';
+    prevBtn.style.right = 'auto';
+    prevBtn.style.top = '50%';
+    prevBtn.style.transform = `translateY(-50%) translateY(${offsetY}px)`;
+
+    nextBtn.style.right = (edgeOffset - offsetX) + 'px';
+    nextBtn.style.left = 'auto';
+    nextBtn.style.top = '50%';
+    nextBtn.style.transform = `translateY(-50%) translateY(${offsetY}px)`;
 
     prevBtn.addEventListener('mouseenter', () => { prevBtn.style.backgroundColor = arrowHoverBackground; });
     prevBtn.addEventListener('mouseleave', () => { prevBtn.style.backgroundColor = arrowBackground; });
