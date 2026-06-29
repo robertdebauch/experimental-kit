@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    const container = document.querySelector('[data-cards-slider]');
+    if (!container) {
+        return;
+    }
+
     console.log('Слайдер v0.2.0 загружен. Атрибуты:', {
         offsetX: container.getAttribute('data-arrow-offset-x'),
         offsetY: container.getAttribute('data-arrow-offset-y'),
@@ -7,11 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         edgeOffset: container.getAttribute('data-arrow-edge-offset'),
         arrowBg: container.getAttribute('data-arrow-bg')
     });
-
-    const container = document.querySelector('[data-cards-slider]');
-    if (!container) {
-        return;
-    }
 
     const scrollerCatcher = container.getAttribute('data-scroller-selector') || '.tn-molecule';
     const scroller = container.querySelector(scrollerCatcher);
@@ -33,20 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.createElement('button');
     prevBtn.className = 'slider-btn slider-btn--prev';
     prevBtn.style.backgroundColor = arrowBackground;
-    prevBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
+    prevBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: ${arrowSize}px !important; height: ${arrowHeight}px !important;"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'slider-btn slider-btn--next';
     nextBtn.style.backgroundColor = arrowBackground;
-    nextBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
+    nextBtn.innerHTML = `<svg width="${arrowSize}" height="${arrowHeight}" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: ${arrowSize}px !important; height: ${arrowHeight}px !important;"><path d="M34 15.0005L19.2664 30L16.2373 26.9926L25.9117 17.1438H0V12.8571H25.9117L16.2373 3.00737L19.2664 0L34 15.0005Z" fill="${arrowColor}"/></svg>`;
 
     prevBtn.style.setProperty('left', (edgeOffset + offsetX) + 'px', 'important');
-    prevBtn.style.right = 'auto';
+    prevBtn.style.setProperty('right', 'auto');
     prevBtn.style.setProperty('top', '50%', 'important');
     prevBtn.style.setProperty('transform', `translateY(-50%) translateY(${offsetY}px)`, 'important');
 
     nextBtn.style.setProperty('right', (edgeOffset + offsetX) + 'px', 'important');
-    nextBtn.style.left = 'auto';
+    nextBtn.style.setProperty('left', 'auto');
     nextBtn.style.setProperty('top', '50%', 'important');
     nextBtn.style.setProperty('transform', `translateY(-50%) translateY(${offsetY}px)`, 'important');
 

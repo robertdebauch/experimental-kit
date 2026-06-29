@@ -1,0 +1,17 @@
+# Тестовые файлы и папки
+test/
+
+# Временные файлы
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Редакторы кода
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Зависимости (если в будущем появится package.json)
+node_modules/
